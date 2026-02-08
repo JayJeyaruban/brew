@@ -1,4 +1,4 @@
-package com.jayjeyaruban
+package com.jayjeyaruban.brew
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,8 +24,8 @@ import brew.sharedui.generated.resources.coffee_24px
 import brew.sharedui.generated.resources.sentiment_dissatisfied_24px
 import brew.sharedui.generated.resources.sentiment_neutral_24px
 import brew.sharedui.generated.resources.sentiment_satisfied_24px
-import com.jayjeyaruban.theme.Theme
-import com.jayjeyaruban.theme.Padding
+import com.jayjeyaruban.brew.theme.Padding
+import com.jayjeyaruban.brew.theme.Theme
 import org.jetbrains.compose.resources.vectorResource
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -34,17 +34,30 @@ import kotlin.time.Duration.Companion.seconds
 @Composable
 fun App() = Theme {
     Scaffold(
-        topBar = {TopAppBar({Text("Brew log")})},
-        floatingActionButton = { ExtendedFloatingActionButton({Text("Log a brew")}, { Icon(vectorResource(
-            Res.drawable.coffee_24px), null) }, {}) }
-        ) { scaffoldPadding ->
-        LazyColumn(Modifier.padding(scaffoldPadding)
-            .padding(horizontal = Padding.Standard)
-            .padding(bottom = Padding.Standard)) {
+        topBar = { TopAppBar({ Text("Brew log") }) },
+        floatingActionButton = {
+            ExtendedFloatingActionButton({ Text("Log a brew") }, {
+                Icon(
+                    vectorResource(
+                        Res.drawable.coffee_24px
+                    ), null
+                )
+            }, {})
+        }
+    ) { scaffoldPadding ->
+        LazyColumn(
+            Modifier.padding(scaffoldPadding)
+                .padding(horizontal = Padding.Standard)
+                .padding(bottom = Padding.Standard)
+        ) {
             item {
                 SampleData.firstOrNull()?.let { top ->
                     Card(Modifier.fillMaxWidth()) {
-                        Column(Modifier.padding(Padding.Standard)) {
+                        Column(
+                            Modifier.padding(
+                                Padding.Standard
+                            )
+                        ) {
                             Text("Last Brew")
                             Text(top.bean)
                             Text("UP ${top.beanIn} -> ${top.out} in ${top.time}")
@@ -54,13 +67,22 @@ fun App() = Theme {
             }
 
             item {
-                Spacer(Modifier.size(Padding.XSpacious))
-                Text("Recent Brews", style = Theme.typography.titleMedium)
+                Spacer(
+                    Modifier.size(
+                        Padding.XSpacious
+                    )
+                )
+                Text(
+                    "Recent Brews",
+                    style = Theme.typography.titleMedium
+                )
             }
 
-            val remaining =SampleData.drop(1)
+            val remaining = SampleData.drop(1)
             itemsIndexed(remaining) { i, brew ->
-                ListItem({Text("${brew.bean} ${brew.beanIn} -> ${brew.out} in ${brew.time}")}, leadingContent = {brew.ImpressionIcon()})
+                ListItem(
+                    { Text("${brew.bean} ${brew.beanIn} -> ${brew.out} in ${brew.time}") },
+                    leadingContent = { brew.ImpressionIcon() })
                 if (i < remaining.lastIndex) {
                     Box(Modifier.padding(horizontal = Padding.Standard)) {
                         HorizontalDivider()

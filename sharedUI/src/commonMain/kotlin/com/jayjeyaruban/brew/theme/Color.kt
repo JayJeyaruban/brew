@@ -1,4 +1,4 @@
-package com.jayjeyaruban.theme
+package com.jayjeyaruban.brew.theme
 
 import androidx.compose.ui.graphics.Color
 
