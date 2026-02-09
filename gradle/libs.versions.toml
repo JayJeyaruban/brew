@@ -14,6 +14,7 @@ kotlinx-datetime = "0.7.1"
 sqlDelight = "2.2.1"
 buildConfig = "6.0.7"
 materialKolor = "4.1.1"
+multiplatform-nav3-ui = "1.0.0-alpha05"
 
 [libraries]
 
@@ -50,6 +51,7 @@ sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", versi
 sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 sqlDelight-coroutines-extension = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
+jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "multiplatform-nav3-ui" }
 
 [plugins]
 

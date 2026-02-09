@@ -51,6 +51,8 @@ kotlin {
             implementation(libs.materialKolor)
 
             implementation(libs.sqlDelight.coroutines.extension)
+
+            implementation(libs.jetbrains.navigation3.ui)
         }
 
         commonTest.dependencies {
