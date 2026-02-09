@@ -20,6 +20,7 @@ internal fun Theme(
 }
 
 object Padding {
+    val XCompact = 4.dp
     val Compact = 8.dp
     val Standard = 16.dp
     val Spacious = 24.dp

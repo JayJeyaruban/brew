@@ -2,6 +2,7 @@ package com.jayjeyaruban.brew.ui.view.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import brew.sharedui.generated.resources.Res
@@ -53,27 +55,23 @@ fun HomeScreen() {
             item {
                 SampleData.firstOrNull()?.let { top ->
                     Card(Modifier.fillMaxWidth()) {
-                        Column(
-                            Modifier.padding(
-                                Padding.Standard
-                            )
-                        ) {
-                            Text("Last Brew")
+                        Column(Modifier.padding(Padding.Standard)) {
+                            Text("Last Brew", style = Theme.typography.titleMedium)
                             Text(top.bean.name)
-                            Text("UP ${top.beanIn} -> ${top.out} in ${top.time}")
+                            Row(Modifier.padding(top = Padding.XCompact)) {
+                                top.ImpressionIcon()
+                                Spacer(Modifier.size(Padding.XCompact))
+                                Text("${top.beanIn} -> ${top.out} in ${top.time}", Modifier.align(Alignment.CenterVertically))
+                            }
                         }
                     }
                 }
             }
 
             item {
-                Spacer(
-                    Modifier.size(
-                        Padding.XSpacious
-                    )
-                )
+                Spacer(Modifier.size(Padding.XSpacious))
                 Text(
-                    "Recent Brews",
+                    "Previous Brews",
                     style = Theme.typography.titleMedium
                 )
             }
@@ -81,7 +79,7 @@ fun HomeScreen() {
             val remaining = SampleData.drop(1)
             itemsIndexed(remaining) { i, brew ->
                 ListItem(
-                    { Text("${brew.bean} ${brew.beanIn} -> ${brew.out} in ${brew.time}") },
+                    { Text("${brew.bean.name} ${brew.beanIn} -> ${brew.out} in ${brew.time}") },
                     leadingContent = { brew.ImpressionIcon() })
                 if (i < remaining.lastIndex) {
                     Box(Modifier.padding(horizontal = Padding.Standard)) {
