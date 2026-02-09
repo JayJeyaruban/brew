@@ -1,4 +1,4 @@
-package com.jayjeyaruban.brew.theme
+package com.jayjeyaruban.brew.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
