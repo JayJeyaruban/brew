@@ -1,0 +1,25 @@
+CREATE TABLE Brew (
+    id INTEGER PRIMARY KEY NOT NULL,
+    recipeId INTEGER NOT NULL,
+    output INTEGER NOT NULL,
+    brewedAt INTEGER NOT NULL,
+    brewTime INTEGER NOT NULL,
+    impression TEXT NOT NULL,
+
+    FOREIGN KEY (recipeId) REFERENCES Recipe(id)
+);
+
+recentBrews:
+SELECT
+    bl.id,
+    bl.recipeId AS recipeId,
+    b.name AS beanName,
+    r.dose,
+    bl.output,
+    bl.brewedAt,
+    bl.brewTime,
+    bl.impression
+FROM Brew bl
+INNER JOIN Recipe r ON bl.recipeId = r.id
+INNER JOIN Bean b ON r.beanId = b.id
+ORDER BY bl.brewTime DESC;

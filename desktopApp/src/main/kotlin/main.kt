@@ -4,6 +4,9 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import java.awt.Dimension
 import com.jayjeyaruban.brew.App
+import com.jayjeyaruban.brew.data.database.JvmDriverFactory
+import com.jayjeyaruban.brew.di.AppGraph
+import kotlinx.coroutines.Dispatchers
 
 fun main() = application {
     Window(
@@ -12,7 +15,7 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
     ) {
         window.minimumSize = Dimension(350, 600)
-        App()
+        App(AppGraph(JvmDriverFactory, Dispatchers.IO))
     }
 }
 

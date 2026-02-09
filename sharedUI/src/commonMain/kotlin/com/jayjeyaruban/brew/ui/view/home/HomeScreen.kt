@@ -1,5 +1,7 @@
 package com.jayjeyaruban.brew.ui.view.home
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,64 +28,84 @@ import brew.sharedui.generated.resources.coffee_24px
 import brew.sharedui.generated.resources.sentiment_dissatisfied_24px
 import brew.sharedui.generated.resources.sentiment_neutral_24px
 import brew.sharedui.generated.resources.sentiment_satisfied_24px
-import com.jayjeyaruban.brew.domain.Bean
-import com.jayjeyaruban.brew.domain.BrewLog
-import com.jayjeyaruban.brew.ui.theme.Padding
+import com.jayjeyaruban.brew.domain.RecentBrew
+import com.jayjeyaruban.brew.ui.theme.Spacing
 import com.jayjeyaruban.brew.ui.theme.Theme
 import org.jetbrains.compose.resources.vectorResource
-import kotlin.time.Duration.Companion.seconds
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    recentBrews: List<RecentBrew>,
+    onFabPress: () -> Unit,
+    onItemPress: (RecentBrew.RecipeId) -> Unit,
+) {
+    val mostRecent = recentBrews.firstOrNull()
+    val remainingRecent = recentBrews.drop(1)
+
     Scaffold(
         topBar = { TopAppBar({ Text("Brew log") }) },
         floatingActionButton = {
-            ExtendedFloatingActionButton({ Text("Log a brew") }, {
-                Icon(
-                    vectorResource(
-                        Res.drawable.coffee_24px
-                    ), null
-                )
-            }, {})
+            mostRecent?.let {
+                ExtendedFloatingActionButton({ Text("Log a brew") }, {
+                    Icon(
+                        vectorResource(
+                            Res.drawable.coffee_24px
+                        ), null
+                    )
+                }, onFabPress)
+            }
         }
     ) { scaffoldPadding ->
         LazyColumn(
             Modifier.padding(scaffoldPadding)
-                .padding(horizontal = Padding.Standard)
-                .padding(bottom = Padding.Standard)
+                .padding(horizontal = Spacing.Standard)
+                .padding(bottom = Spacing.Standard)
         ) {
             item {
-                SampleData.firstOrNull()?.let { top ->
-                    Card(Modifier.fillMaxWidth()) {
-                        Column(Modifier.padding(Padding.Standard)) {
+                if (mostRecent == null) {
+                    Card(Modifier.clickable(true, onClick = onFabPress)) {
+                        Column(Modifier.fillMaxWidth().padding(Spacing.Standard),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(Spacing.Compact)
+                        ) {
+                            Text("No brews logged", style = Theme.typography.titleLarge)
+                            Text("Tap here to log your first!")
+                        }
+                    }
+                } else {
+                    Card(Modifier.fillMaxWidth().clickable(true) { onItemPress(mostRecent.recipeId) }) {
+                        Column(Modifier.padding(Spacing.Standard)) {
                             Text("Last Brew", style = Theme.typography.titleMedium)
-                            Text(top.bean.name)
-                            Row(Modifier.padding(top = Padding.XCompact)) {
-                                top.ImpressionIcon()
-                                Spacer(Modifier.size(Padding.XCompact))
-                                Text("${top.beanIn} -> ${top.out} in ${top.time}", Modifier.align(Alignment.CenterVertically))
+                            Text(mostRecent.beanName)
+                            Row(Modifier.padding(top = Spacing.XCompact)) {
+                                mostRecent.ImpressionIcon()
+                                Spacer(Modifier.size(Spacing.XCompact))
+                                Text("${mostRecent.beanName} -> ${mostRecent.output} in ${mostRecent.brewTime}", Modifier.align(Alignment.CenterVertically))
                             }
                         }
                     }
                 }
             }
 
+            if (remainingRecent.isNotEmpty()) {
             item {
-                Spacer(Modifier.size(Padding.XSpacious))
+                Spacer(Modifier.size(Spacing.XSpacious))
                 Text(
                     "Previous Brews",
                     style = Theme.typography.titleMedium
                 )
             }
 
-            val remaining = SampleData.drop(1)
-            itemsIndexed(remaining) { i, brew ->
-                ListItem(
-                    { Text("${brew.bean.name} ${brew.beanIn} -> ${brew.out} in ${brew.time}") },
-                    leadingContent = { brew.ImpressionIcon() })
-                if (i < remaining.lastIndex) {
-                    Box(Modifier.padding(horizontal = Padding.Standard)) {
-                        HorizontalDivider()
+                itemsIndexed(remainingRecent) { i, brew ->
+                    ListItem(
+                        { Text("${brew.beanName} ${brew.dose} -> ${brew.output} in ${brew.brewTime}") },
+                        leadingContent = { brew.ImpressionIcon() },
+                        modifier = Modifier.clickable(true) { onItemPress (brew.recipeId) }
+                    )
+                    if (i < remainingRecent.lastIndex) {
+                        Box(Modifier.padding(horizontal = Spacing.Standard)) {
+                            HorizontalDivider()
+                        }
                     }
                 }
             }
@@ -95,40 +117,16 @@ fun HomeScreen() {
 @Composable
 private fun HomeScreenPreview() {
     Theme {
-        HomeScreen()
+        HomeScreen(emptyList(), {}, {})
     }
 }
 
-private val SampleData = listOf(
-    BrewLog(
-        Bean("Coffee A"),
-        18,
-        36,
-        28.seconds,
-        BrewLog.Impression.Positive,
-    ),
-    BrewLog(
-        Bean("KTH"),
-        18,
-        38,
-        28.seconds,
-        BrewLog.Impression.Positive,
-    ),
-    BrewLog(
-        Bean("WH"),
-        18,
-        34,
-        23.seconds,
-        BrewLog.Impression.Neutral,
-    )
-)
-
 @Composable
-private fun BrewLog.ImpressionIcon(modifier: Modifier = Modifier) {
+private fun RecentBrew.ImpressionIcon(modifier: Modifier = Modifier) {
     val vectorImage = vectorResource(when (impression) {
-        BrewLog.Impression.Positive -> Res.drawable.sentiment_satisfied_24px
-        BrewLog.Impression.Negative -> Res.drawable.sentiment_dissatisfied_24px
-        BrewLog.Impression.Neutral -> Res.drawable.sentiment_neutral_24px
+        RecentBrew.Impression.Positive -> Res.drawable.sentiment_satisfied_24px
+        RecentBrew.Impression.Negative -> Res.drawable.sentiment_dissatisfied_24px
+        RecentBrew.Impression.Neutral -> Res.drawable.sentiment_neutral_24px
     })
     Icon(vectorImage, null, modifier)
 }

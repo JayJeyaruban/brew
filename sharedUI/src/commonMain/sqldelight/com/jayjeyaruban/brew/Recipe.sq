@@ -1,0 +1,8 @@
+CREATE TABLE Recipe (
+    id INTEGER PRIMARY KEY NOT NULL,
+    beanId INTEGER NOT NULL,
+    dose INTEGER NOT NULL,
+    targetOutput INTEGER,
+
+    FOREIGN KEY (beanId) REFERENCES Bean(id)
+);

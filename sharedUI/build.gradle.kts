@@ -49,6 +49,8 @@ kotlin {
             implementation(libs.multiplatformSettings)
             implementation(libs.kotlinx.datetime)
             implementation(libs.materialKolor)
+
+            implementation(libs.sqlDelight.coroutines.extension)
         }
 
         commonTest.dependencies {
@@ -75,6 +77,9 @@ kotlin {
             implementation(libs.sqlDelight.driver.native)
         }
 
+        webMain.dependencies {
+            implementation(libs.sqlDelight.driver.js)
+        }
     }
 
     targets
@@ -84,7 +89,7 @@ kotlin {
             binaries {
                 framework {
                     baseName = "SharedUI"
-                    isStatic = true
+                    isStatic = false
                 }
             }
         }
@@ -112,7 +117,7 @@ buildConfig {
 
 sqldelight {
     databases {
-        create("MyDatabase") {
+        create("BrewDatabase") {
             // Database configuration here.
             // https://cashapp.github.io/sqldelight
             packageName.set("com.jayjeyaruban.brew.db")
