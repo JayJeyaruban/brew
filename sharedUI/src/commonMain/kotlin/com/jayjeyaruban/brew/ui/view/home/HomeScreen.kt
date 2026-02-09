@@ -94,7 +94,9 @@ fun HomeScreen() {
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    Theme {
+        HomeScreen()
+    }
 }
 
 private val SampleData = listOf(

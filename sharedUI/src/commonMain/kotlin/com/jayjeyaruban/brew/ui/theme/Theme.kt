@@ -1,5 +1,6 @@
 package com.jayjeyaruban.brew.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
@@ -11,10 +12,12 @@ typealias Theme = MaterialTheme
 
 @Composable
 internal fun Theme(
+    isDark: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     DynamicMaterialTheme(
         seedColor = Color(0xFFFF9249),
+        isDark = isDark,
         content = { Surface(content = content) }
         )
 }
