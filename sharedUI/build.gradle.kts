@@ -115,7 +115,7 @@ sqldelight {
         create("MyDatabase") {
             // Database configuration here.
             // https://cashapp.github.io/sqldelight
-            packageName.set("com.jayjeyaruban.db")
+            packageName.set("com.jayjeyaruban.brew.db")
         }
     }
 }
