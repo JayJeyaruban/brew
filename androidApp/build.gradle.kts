@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.jayjeyaruban.androidApp"
+    namespace = "com.jayjeyaruban.brew.androidApp"
     compileSdk = 36
 
     defaultConfig {
         minSdk = 23
         targetSdk = 36
 
-        applicationId = "com.jayjeyaruban.androidApp"
+        applicationId = "com.jayjeyaruban.brew.androidApp"
         versionCode = 1
         versionName = "1.0.0"
     }

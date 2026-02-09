@@ -27,7 +27,7 @@ compose.desktop {
             }
             macOS {
                 iconFile.set(project.file("appIcons/MacosIcon.icns"))
-                bundleID = "com.jayjeyaruban.desktopApp"
+                bundleID = "com.jayjeyaruban.brew.desktopApp"
             }
         }
     }

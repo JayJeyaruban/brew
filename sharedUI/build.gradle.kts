@@ -94,7 +94,7 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
 }
 android {
-    namespace = "com.jayjeyaruban"
+    namespace = "com.jayjeyaruban.brew"
     compileSdk = 36
     defaultConfig {
         minSdk = 23
