@@ -1,11 +1,11 @@
 package com.jayjeyaruban.brew
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.retain.retain
 import androidx.compose.runtime.saveable.rememberSerializable
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -28,7 +28,7 @@ import kotlinx.serialization.modules.subclass
 @Composable
 fun App(appGraph: AppGraph) = Theme {
     val appGraph = retain { appGraph }
-    val recentBrews by appGraph.store.recentBrews.collectAsStateWithLifecycle(emptyList())
+    val recentBrews by appGraph.store.recentBrews.collectAsState(emptyList())
     val stack = rememberNavBackStack(SavedStateConfiguration { serializersModule = Navigation.Serializers }, Navigation.Home)
 
     NavDisplay(
