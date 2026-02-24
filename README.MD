@@ -1,29 +1,46 @@
 # brew
 
+Contributor guide: see `CONTRIBUTING.md` (setup, validation, PR guidance, and commit message conventions).
+
+## Prerequisites
+
+- JDK 17
+- Git
+- Android Studio (recommended for Kotlin Multiplatform and Android workflows)
+- Xcode / Apple iOS toolchain installed on macOS (required for iOS targets)
+- A modern browser (for web testing)
+
+Use the Gradle wrapper (`./gradlew`) instead of a system Gradle install.
+
+## Getting Set Up
+
+1. Clone the repository.
+2. Open the project in Android Studio or IntelliJ IDEA.
+3. Let Gradle sync and download dependencies.
+4. Verify Gradle works:
+   - `./gradlew help`
+   - or `./gradlew tasks`
+5. Run one supported target (Android or Web) to confirm your local setup.
+
+If you plan to work on iOS, make sure the Apple iOS toolchain is installed.
+In the current workflow, you can test/run iOS from Android Studio; opening the project in the Xcode app is optional.
+
 ### Android
-To run the application on android device/emulator:  
- - open project in Android Studio and run imported android run configuration  
+To run the application on an Android device/emulator:  
+ - Open the project in Android Studio and run the imported Android run configuration  
 
-To build the application bundle:  
- - run `./gradlew :androidApp:assembleDebug`  
- - find `.apk` file in `androidApp/build/outputs/apk/debug/androidApp-debug.apk`  
-
-### Desktop
-Run the desktop application: `./gradlew :desktopApp:run`  
-Run the desktop **hot reload** application: `./gradlew :desktopApp:hotRun --auto`  
+To build a debug APK:  
+ - Run `./gradlew :androidApp:assembleDebug`  
+ - Find the `.apk` file in `androidApp/build/outputs/apk/debug/androidApp-debug.apk`  
 
 ### iOS
 To run the application on iPhone device/simulator:  
- - Open `iosApp/iosApp.xcproject` in Xcode and run standard configuration  
- - Or use [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) for Android Studio  
+ - Run from Android Studio in the current workflow (with Xcode / Apple iOS toolchain installed on macOS)  
+ - Or open `iosApp/iosApp.xcproject` in Xcode and run standard configuration  
 
-### Web Distribution
+### Web
+Run the JS browser application: `./gradlew :webApp:jsBrowserDevelopmentRun`  
+Run the Wasm browser application: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`  
+
 Build web distribution: `./gradlew :webApp:composeCompatibilityBrowserDistribution`  
-Deploy a dir `webApp/build/dist/composeWebCompatibility/productionExecutable` to a web server  
-
-### JS Browser
-Run the browser application: `./gradlew :webApp:jsBrowserDevelopmentRun`  
-
-### Wasm Browser
-Run the browser application: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`  
-
+Deploy the `webApp/build/dist/composeWebCompatibility/productionExecutable` directory to a web server  
