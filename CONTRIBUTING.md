@@ -39,6 +39,26 @@ Examples (not strict requirements for every change):
 ./gradlew :androidApp:assembleDebug
 ```
 
+## CI Checks
+
+- CI runs on pull requests.
+- Required checks are:
+  - `Linux Verify`
+  - `macOS iOS Smoke`
+  - `PR Commit Stack Verify`
+- `CI` validates the PR head commit.
+- `PR Commit Stack Verify` validates earlier commits in the current PR stack.
+- GitHub may show many checks because each job (and matrix-expanded job) appears as a separate check.
+- Docs-only PRs intentionally skip expensive CI jobs while still producing passing required checks.
+
+### CI Maintainer Notes
+
+- Avoid renaming required check job names without updating branch protection/rulesets.
+- Keep non-trivial CI logic in `scripts/ci/` rather than large inline workflow scripts.
+- Use job-level docs-only skips (not workflow-level `paths-ignore`) for required-check workflows.
+- Any job that runs repo scripts must include `actions/checkout@v4`.
+- Prefer local smoke tests for CI helper scripts when changing CI behavior.
+
 ## Coding Guidelines
 
 - Follow the existing Kotlin/Compose style used in nearby files.
@@ -53,6 +73,7 @@ SQLDelight note:
 ## Commit Messages (Conventional Commits)
 
 This project uses Conventional Commits.
+Commit messages are also validated on pull requests (via cocogitto) for commits in the PR branch.
 
 Format:
 
