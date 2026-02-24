@@ -1,6 +1,5 @@
 package com.jayjeyaruban.brew.di
 
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
