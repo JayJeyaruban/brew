@@ -29,10 +29,12 @@ import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
 @Composable
-fun BrewEntryScreen() {
-    Scaffold(topBar = { TopAppBar({ Text("Brew") }) }) { padding ->
-        Column(Modifier.padding(padding).padding(Spacing.Standard),
-            verticalArrangement = Arrangement.spacedBy(Spacing.Spacious)) {
+fun BrewEntryScreen(modifier: Modifier = Modifier) {
+    Scaffold(modifier = modifier, topBar = { TopAppBar({ Text("Brew") }) }) { padding ->
+        Column(
+            Modifier.padding(padding).padding(Spacing.Standard),
+            verticalArrangement = Arrangement.spacedBy(Spacing.Spacious),
+        ) {
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.Standard)) {
                 val (bean, setBean) = rememberSaveable { mutableStateOf("") }
                 val (grinder, setGrinder) = rememberSaveable { mutableStateOf("") }
@@ -42,30 +44,62 @@ fun BrewEntryScreen() {
 
                 Text("Recipe", style = Theme.typography.titleLarge)
 
-                TextField(bean, setBean, Modifier.fillMaxWidth(), label = {Text("Bean")})
-                TextField(grinder, setGrinder, Modifier.fillMaxWidth(), label = {Text("Grinder")})
-                TextField(grindSetting?.toString() ?: "", {setGrindSetting(it.toLong())}, Modifier.fillMaxWidth(), label = {Text("Grind setting")})
+                TextField(bean, setBean, Modifier.fillMaxWidth(), label = { Text("Bean") })
+                TextField(grinder, setGrinder, Modifier.fillMaxWidth(), label = { Text("Grinder") })
+                TextField(
+                    grindSetting?.toString() ?: "",
+                    { setGrindSetting(it.toLong()) },
+                    Modifier.fillMaxWidth(),
+                    label = { Text("Grind setting") },
+                )
 
                 Row(horizontalArrangement = Arrangement.spacedBy(Spacing.Compact)) {
-                    TextField(dose?.toString() ?: "", {setDose(it.toLong())}, Modifier.weight(1f), label = {Text("Dose")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number))
+                    TextField(
+                        dose?.toString() ?: "",
+                        {
+                            setDose(it.toLong())
+                        },
+                        Modifier.weight(
+                            1f,
+                        ),
+                        label = { Text("Dose") },
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                    )
 
-                    TextField(targetOutput?.toString() ?: "", {setTargetOutput(it.toLong())},
-                        Modifier.weight(1f), label = {Text("Target Yield")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number))
+                    TextField(
+                        targetOutput?.toString() ?: "",
+                        { setTargetOutput(it.toLong()) },
+                        Modifier.weight(1f),
+                        label = { Text("Target Yield") },
+                        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                    )
                 }
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(Spacing.Standard)) {
-                val (output, setOutput) =  rememberSaveable { mutableStateOf<Long?>(null) }
+                val (output, setOutput) = rememberSaveable { mutableStateOf<Long?>(null) }
                 val (recordedAt, setWhen) = rememberSerializable { mutableStateOf(Clock.System.now()) }
                 val (extractionTime, setExtractionTime) = rememberSaveable { mutableStateOf<Long?>(null) }
                 Text("Brew", style = Theme.typography.titleLarge)
 
-                TextField(output?.toString() ?: "", {setOutput(it.toLong())}, Modifier.fillMaxWidth(), label = {Text("Yield (g)")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number))
+                TextField(output?.toString() ?: "", {
+                    setOutput(it.toLong())
+                }, Modifier.fillMaxWidth(), label = {
+                    Text("Yield (g)")
+                }, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number))
 
-                TextField(recordedAt.toLocalDateTime(TimeZone.currentSystemDefault()).toString(), {},
-                    Modifier.fillMaxWidth(), label = {Text("When")})
+                TextField(
+                    recordedAt.toLocalDateTime(TimeZone.currentSystemDefault()).toString(),
+                    {},
+                    Modifier.fillMaxWidth(),
+                    label = { Text("When") },
+                )
 
-                TextField(extractionTime?.toString() ?: "", {setExtractionTime(it.toLong())}, Modifier.fillMaxWidth(), label = {Text("Extraction time (s)")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number))
+                TextField(extractionTime?.toString() ?: "", {
+                    setExtractionTime(it.toLong())
+                }, Modifier.fillMaxWidth(), label = {
+                    Text("Extraction time (s)")
+                }, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number))
             }
         }
     }

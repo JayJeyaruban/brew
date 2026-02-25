@@ -38,35 +38,40 @@ fun HomeScreen(
     recentBrews: List<RecentBrew>,
     onFabPress: () -> Unit,
     onItemPress: (RecentBrew.RecipeId) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val mostRecent = recentBrews.firstOrNull()
     val remainingRecent = recentBrews.drop(1)
 
     Scaffold(
+        modifier = modifier,
         topBar = { TopAppBar({ Text("Brew log") }) },
         floatingActionButton = {
             mostRecent?.let {
                 ExtendedFloatingActionButton({ Text("Log a brew") }, {
                     Icon(
                         vectorResource(
-                            Res.drawable.coffee_24px
-                        ), null
+                            Res.drawable.coffee_24px,
+                        ),
+                        null,
                     )
                 }, onFabPress)
             }
-        }
+        },
     ) { scaffoldPadding ->
         LazyColumn(
-            Modifier.padding(scaffoldPadding)
+            Modifier
+                .padding(scaffoldPadding)
                 .padding(horizontal = Spacing.Standard)
-                .padding(bottom = Spacing.Standard)
+                .padding(bottom = Spacing.Standard),
         ) {
             item {
                 if (mostRecent == null) {
                     Card(Modifier.clickable(true, onClick = onFabPress)) {
-                        Column(Modifier.fillMaxWidth().padding(Spacing.Standard),
+                        Column(
+                            Modifier.fillMaxWidth().padding(Spacing.Standard),
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(Spacing.Compact)
+                            verticalArrangement = Arrangement.spacedBy(Spacing.Compact),
                         ) {
                             Text("No brews logged", style = Theme.typography.titleLarge)
                             Text("Tap here to log your first!")
@@ -80,7 +85,10 @@ fun HomeScreen(
                             Row(Modifier.padding(top = Spacing.XCompact)) {
                                 mostRecent.ImpressionIcon()
                                 Spacer(Modifier.size(Spacing.XCompact))
-                                Text("${mostRecent.beanName} -> ${mostRecent.output} in ${mostRecent.brewTime}", Modifier.align(Alignment.CenterVertically))
+                                Text(
+                                    "${mostRecent.beanName} -> ${mostRecent.output} in ${mostRecent.brewTime}",
+                                    Modifier.align(Alignment.CenterVertically),
+                                )
                             }
                         }
                     }
@@ -88,19 +96,19 @@ fun HomeScreen(
             }
 
             if (remainingRecent.isNotEmpty()) {
-            item {
-                Spacer(Modifier.size(Spacing.XSpacious))
-                Text(
-                    "Previous Brews",
-                    style = Theme.typography.titleMedium
-                )
-            }
+                item {
+                    Spacer(Modifier.size(Spacing.XSpacious))
+                    Text(
+                        "Previous Brews",
+                        style = Theme.typography.titleMedium,
+                    )
+                }
 
                 itemsIndexed(remainingRecent) { i, brew ->
                     ListItem(
                         { Text("${brew.beanName} ${brew.dose} -> ${brew.output} in ${brew.brewTime}") },
                         leadingContent = { brew.ImpressionIcon() },
-                        modifier = Modifier.clickable(true) { onItemPress (brew.recipeId) }
+                        modifier = Modifier.clickable(true) { onItemPress(brew.recipeId) },
                     )
                     if (i < remainingRecent.lastIndex) {
                         Box(Modifier.padding(horizontal = Spacing.Standard)) {
@@ -123,10 +131,13 @@ private fun HomeScreenPreview() {
 
 @Composable
 private fun RecentBrew.ImpressionIcon(modifier: Modifier = Modifier) {
-    val vectorImage = vectorResource(when (impression) {
-        RecentBrew.Impression.Positive -> Res.drawable.sentiment_satisfied_24px
-        RecentBrew.Impression.Negative -> Res.drawable.sentiment_dissatisfied_24px
-        RecentBrew.Impression.Neutral -> Res.drawable.sentiment_neutral_24px
-    })
+    val vectorImage =
+        vectorResource(
+            when (impression) {
+                RecentBrew.Impression.Positive -> Res.drawable.sentiment_satisfied_24px
+                RecentBrew.Impression.Negative -> Res.drawable.sentiment_dissatisfied_24px
+                RecentBrew.Impression.Neutral -> Res.drawable.sentiment_neutral_24px
+            },
+        )
     Icon(vectorImage, null, modifier)
 }
