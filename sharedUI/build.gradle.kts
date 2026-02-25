@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.buildConfig)
+    alias(libs.plugins.kotlinter)
 }
 
 kotlin {
@@ -97,6 +98,15 @@ kotlin {
 buildConfig {
     // BuildConfig configuration here.
     // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+}
+
+kotlinter {
+    ktlintVersion = "1.8.0"
+    ignoreFormatFailures = false
+}
+
+dependencies {
+    add("ktlint", libs.compose.rules.ktlint)
 }
 
 sqldelight {

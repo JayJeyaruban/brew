@@ -11,7 +11,7 @@ data class RecentBrew(
     val dose: Dose,
     val output: Output,
     val brewTime: Duration,
-    val impression: Impression
+    val impression: Impression,
 ) {
     companion object {
         fun fromPersistence(persistence: RecentBrews) = RecentBrew(
@@ -20,13 +20,12 @@ data class RecentBrew(
             dose = Dose(persistence.dose),
             output = Output(persistence.output),
             brewTime = persistence.brewTime.microseconds,
-            impression = enumValueOf(persistence.impression)
+            impression = enumValueOf(persistence.impression),
         )
     }
 
     @JvmInline
     value class RecipeId(val id: Long)
-
 
     @JvmInline
     value class Dose(val value: Long)

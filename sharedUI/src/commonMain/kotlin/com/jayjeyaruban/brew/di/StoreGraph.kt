@@ -9,11 +9,13 @@ import com.jayjeyaruban.brew.domain.RecentBrew
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.map
 
-class StoreGraph(
-    dispatcher: CoroutineDispatcher,
-    driver: SqlDriver
-) {
+class StoreGraph(dispatcher: CoroutineDispatcher, driver: SqlDriver) {
     val db = BrewDatabase(driver)
 
-    val recentBrews = db.brewQueries.recentBrews().asFlow().mapToList(dispatcher).map { brews -> brews.map {  RecentBrew.fromPersistence(it) } }
+    val recentBrews =
+        db.brewQueries
+            .recentBrews()
+            .asFlow()
+            .mapToList(dispatcher)
+            .map { brews -> brews.map { RecentBrew.fromPersistence(it) } }
 }

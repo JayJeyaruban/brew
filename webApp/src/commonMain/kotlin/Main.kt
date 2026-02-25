@@ -6,6 +6,13 @@ import com.jayjeyaruban.brew.di.AppGraph
 import kotlinx.coroutines.Dispatchers
 
 @OptIn(ExperimentalComposeUiApi::class)
-fun main() = ComposeViewport { App(AppGraph(DatabaseDriverFactory { schema, db ->
-    TODO()
-}, Dispatchers.Default)) }
+fun main() = ComposeViewport {
+    App(
+        AppGraph(
+            DatabaseDriverFactory { schema, db ->
+                TODO()
+            },
+            Dispatchers.Default,
+        ),
+    )
+}

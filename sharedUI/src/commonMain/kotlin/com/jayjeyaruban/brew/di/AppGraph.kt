@@ -5,7 +5,6 @@ import com.jayjeyaruban.brew.db.BrewDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
-
 class AppGraph(
     df: DatabaseDriverFactory,
     ioDispatcher: CoroutineDispatcher,
@@ -13,4 +12,3 @@ class AppGraph(
 ) {
     val store = StoreGraph(ioDispatcher, df.createDriver(BrewDatabase.Schema, "brew.db"))
 }
-

@@ -32,33 +32,36 @@ fun App(appGraph: AppGraph) = Theme {
     val stack = rememberNavBackStack(SavedStateConfiguration { serializersModule = Navigation.Serializers }, Navigation.Home)
 
     NavDisplay(
-        backStack =  stack,
-        entryProvider = entryProvider {
-        entry<Navigation.Home> {
-            HomeScreen(recentBrews, {stack.add(Navigation.BrewEntry)}, {})
-        }
+        backStack = stack,
+        entryProvider =
+            entryProvider {
+                entry<Navigation.Home> {
+                    HomeScreen(recentBrews, { stack.add(Navigation.BrewEntry) }, {})
+                }
 
-            entry<Navigation.BrewEntry> {
-                BrewEntryScreen()
-            }
-    })
+                entry<Navigation.BrewEntry> {
+                    BrewEntryScreen()
+                }
+            },
+    )
 }
 
 object Navigation {
     @Serializable
-    sealed interface Route: NavKey
+    sealed interface Route : NavKey
 
     @Serializable
-    data object Home: NavKey
+    data object Home : NavKey
 
     @Serializable
-    data object BrewEntry: NavKey
+    data object BrewEntry : NavKey
 
     @OptIn(ExperimentalSerializationApi::class)
-    val Serializers = SerializersModule {
-        polymorphic(NavKey::class) {
-            subclass(Home::class)
-            subclass(BrewEntry::class)
+    val Serializers =
+        SerializersModule {
+            polymorphic(NavKey::class) {
+                subclass(Home::class)
+                subclass(BrewEntry::class)
+            }
         }
-    }
 }

@@ -5,5 +5,5 @@ import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.db.SqlSchema
 
 fun interface DatabaseDriverFactory {
-    fun createDriver(schema:  SqlSchema<QueryResult.Value<Unit>>, databaseName: String): SqlDriver
+    fun createDriver(schema: SqlSchema<QueryResult.Value<Unit>>, databaseName: String): SqlDriver
 }

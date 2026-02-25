@@ -13,15 +13,16 @@ import platform.UIKit.UIStatusBarStyleLightContent
 import platform.UIKit.UIViewController
 import platform.UIKit.setStatusBarStyle
 
-fun MainViewController(): UIViewController = ComposeUIViewController { 
-    App(AppGraph(DatabaseDriverFactory {schema, db -> NativeSqliteDriver(schema, db)}, Dispatchers.IO))
+@Suppress("FunctionName")
+fun MainViewController(): UIViewController = ComposeUIViewController {
+    App(AppGraph(DatabaseDriverFactory { schema, db -> NativeSqliteDriver(schema, db) }, Dispatchers.IO))
 }
 
 @Composable
 private fun ThemeChanged(isDark: Boolean) {
     LaunchedEffect(isDark) {
         UIApplication.sharedApplication.setStatusBarStyle(
-            if (isDark) UIStatusBarStyleDarkContent else UIStatusBarStyleLightContent
+            if (isDark) UIStatusBarStyleDarkContent else UIStatusBarStyleLightContent,
         )
     }
 }
