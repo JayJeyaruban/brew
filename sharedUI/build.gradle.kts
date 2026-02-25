@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.sqlDelight)
     alias(libs.plugins.buildConfig)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kreplica)
     alias(libs.plugins.kotlinter)
 }
 
@@ -114,7 +116,7 @@ sqldelight {
         create("BrewDatabase") {
             // Database configuration here.
             // https://cashapp.github.io/sqldelight
-            packageName.set("com.jayjeyaruban.brew.db")
+            packageName.set("com.jayjeyaruban.brew.data.database")
         }
     }
 }

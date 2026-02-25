@@ -1,0 +1,11 @@
+CREATE TABLE EspressoMachine (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+);
+
+insertEspressoMachine {
+    INSERT INTO EspressoMachine(name)
+    VALUES (?);
+
+    SELECT last_insert_rowid();
+}

@@ -1,15 +1,16 @@
-package com.jayjeyaruban.brew.domain
+package com.jayjeyaruban.brew.domain.brew
 
-import com.jayjeyaruban.brew.RecentBrews
-import kotlin.jvm.JvmInline
+import com.jayjeyaruban.brew.data.database.models.RecentBrews
+import com.jayjeyaruban.brew.domain.Mass
+import com.jayjeyaruban.brew.domain.recipe.RecipeId
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.microseconds
 
 data class RecentBrew(
     val recipeId: RecipeId,
     val beanName: String,
-    val dose: Dose,
-    val output: Output,
+    val dose: Mass,
+    val output: Mass,
     val brewTime: Duration,
     val impression: Impression,
 ) {
@@ -17,25 +18,10 @@ data class RecentBrew(
         fun fromPersistence(persistence: RecentBrews) = RecentBrew(
             recipeId = RecipeId(persistence.recipeId),
             beanName = persistence.beanName,
-            dose = Dose(persistence.dose),
-            output = Output(persistence.output),
+            dose = Mass(persistence.dose),
+            output = Mass(persistence.output),
             brewTime = persistence.brewTime.microseconds,
             impression = enumValueOf(persistence.impression),
         )
-    }
-
-    @JvmInline
-    value class RecipeId(val id: Long)
-
-    @JvmInline
-    value class Dose(val value: Long)
-
-    @JvmInline
-    value class Output(val value: Long)
-
-    enum class Impression {
-        Positive,
-        Negative,
-        Neutral,
     }
 }

@@ -1,0 +1,11 @@
+CREATE TABLE Bean (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+);
+
+insertBean {
+    INSERT INTO Bean(name)
+    VALUES (?);
+
+    SELECT last_insert_rowid();
+}

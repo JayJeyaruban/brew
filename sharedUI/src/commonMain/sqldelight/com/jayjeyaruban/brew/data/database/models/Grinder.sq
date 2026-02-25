@@ -1,0 +1,11 @@
+CREATE TABLE Grinder (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL
+);
+
+insertGrinder {
+    INSERT INTO Grinder(name)
+    VALUES (?);
+
+    SELECT last_insert_rowid();
+}
