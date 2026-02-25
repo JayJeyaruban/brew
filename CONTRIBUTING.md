@@ -23,7 +23,7 @@ For prerequisites, initial setup, and platform run/build commands, see `README.M
 Before opening a pull request:
 - Run relevant Gradle build/test commands for the module(s) you changed.
 - Prefer module-scoped tasks for faster iteration.
-- If you changed `sharedUI`, validate at least one consumer platform (Android, Web, or iOS) as practical.
+- If you changed `sharedUI`, validate at least one supported consumer platform (Android, Web JS, or iOS) as practical.
 - If there is no automated test coverage for your change, include manual verification steps in the PR.
 
 Validation scope note:

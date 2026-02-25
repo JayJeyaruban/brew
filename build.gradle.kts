@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.android).apply(false)
     alias(libs.plugins.android.application).apply(false)
     alias(libs.plugins.android.kmp.library).apply(false)
-    alias(libs.plugins.kotlin.jvm).apply(false)
     alias(libs.plugins.kotlinx.serialization).apply(false)
     alias(libs.plugins.sqlDelight).apply(false)
     alias(libs.plugins.buildConfig).apply(false)
