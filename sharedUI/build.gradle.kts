@@ -12,8 +12,14 @@ plugins {
 }
 
 kotlin {
-
-    androidTarget() //We need the deprecated target to have working previews
+    androidLibrary {
+        namespace = "com.jayjeyaruban.brew"
+        compileSdk = 36
+        minSdk = 23
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
+    }
 
     js { browser() }
 
@@ -61,6 +67,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelight.driver.android)
+
+            implementation(libs.compose.ui.tooling)
         }
 
         iosMain.dependencies {
@@ -84,21 +92,6 @@ kotlin {
                 }
             }
         }
-}
-
-dependencies {
-    debugImplementation(libs.compose.ui.tooling)
-}
-android {
-    namespace = "com.jayjeyaruban.brew"
-    compileSdk = 36
-    defaultConfig {
-        minSdk = 23
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
 }
 
 buildConfig {
