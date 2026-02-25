@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -16,10 +15,7 @@ kotlin {
 
     androidTarget() //We need the deprecated target to have working previews
 
-    jvm()
-
     js { browser() }
-    wasmJs { browser() }
 
     iosX64()
     iosArm64()
@@ -67,19 +63,12 @@ kotlin {
             implementation(libs.sqlDelight.driver.android)
         }
 
-        jvmMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.sqlDelight.driver.sqlite)
-        }
-
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqlDelight.driver.native)
         }
 
-        webMain.dependencies {
+        jsMain.dependencies {
             implementation(libs.sqlDelight.driver.js)
         }
     }

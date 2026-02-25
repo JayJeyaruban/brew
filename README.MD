@@ -20,7 +20,7 @@ Use the Gradle wrapper (`./gradlew`) instead of a system Gradle install.
 4. Verify Gradle works:
    - `./gradlew help`
    - or `./gradlew tasks`
-5. Run one supported target (Android or Web) to confirm your local setup.
+5. Run one supported target (Android, iOS, or Web JS) to confirm your local setup.
 
 If you plan to work on iOS, make sure the Apple iOS toolchain is installed.
 In the current workflow, you can test/run iOS from Android Studio; opening the project in the Xcode app is optional.
@@ -39,8 +39,9 @@ To run the application on iPhone device/simulator:
  - Or open `iosApp/iosApp.xcproject` in Xcode and run standard configuration  
 
 ### Web
+Supported web target: JavaScript (browser)
+
 Run the JS browser application: `./gradlew :webApp:jsBrowserDevelopmentRun`  
-Run the Wasm browser application: `./gradlew :webApp:wasmJsBrowserDevelopmentRun`  
 
 Build web distribution: `./gradlew :webApp:composeCompatibilityBrowserDistribution`  
 Deploy the `webApp/build/dist/composeWebCompatibility/productionExecutable` directory to a web server  
