@@ -1,6 +1,6 @@
 # brew
 
-Contributor guide: see `CONTRIBUTING.md` (setup, validation, PR guidance, and commit message conventions).
+Contributor guide: see `CONTRIBUTING.md` (validation, style/formatting workflow, PR guidance, and commit message conventions).
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ To build a debug APK:
 ### iOS
 To run the application on iPhone device/simulator:  
  - Run from Android Studio in the current workflow (with Xcode / Apple iOS toolchain installed on macOS)  
- - Or open `iosApp/iosApp.xcproject` in Xcode and run standard configuration  
+ - Or open `iosApp/iosApp.xcodeproj` in Xcode and run standard configuration  
 
 ### Web
 Supported web target: JavaScript (browser)
