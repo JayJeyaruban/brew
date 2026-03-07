@@ -26,6 +26,12 @@ Before opening a pull request:
 - If you changed `sharedUI`, validate at least one supported consumer platform (Android, Web JS, or iOS) as practical.
 - If there is no automated test coverage for your change, include manual verification steps in the PR.
 
+Formatting and lint workflow:
+- Local build/run workflows auto-trigger Kotlin formatting.
+- Run `./gradlew formatKotlin` to trigger formatting manually.
+- Run `./gradlew lintKotlin` before opening a PR to catch style issues early.
+- If lint still fails after formatting, fix remaining non-auto-correctable violations manually.
+
 Validation scope note:
 - Validate the platform(s) you changed whenever possible.
 - Changes in `sharedUI` may require checking multiple platforms.
