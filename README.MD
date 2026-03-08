@@ -8,7 +8,6 @@ Contributor guide: see `CONTRIBUTING.md` (validation, style/formatting workflow,
 - Git
 - Android Studio (recommended for Kotlin Multiplatform and Android workflows)
 - Xcode / Apple iOS toolchain installed on macOS (required for iOS targets)
-- A modern browser (for web testing)
 
 Use the Gradle wrapper (`./gradlew`) instead of a system Gradle install.
 
@@ -20,7 +19,7 @@ Use the Gradle wrapper (`./gradlew`) instead of a system Gradle install.
 4. Verify Gradle works:
    - `./gradlew help`
    - or `./gradlew tasks`
-5. Run one supported target (Android, iOS, or Web JS) to confirm your local setup.
+5. Run one supported target (Android or iOS) to confirm your local setup.
 
 If you plan to work on iOS, make sure the Apple iOS toolchain is installed.
 In the current workflow, you can test/run iOS from Android Studio; opening the project in the Xcode app is optional.
@@ -37,11 +36,3 @@ To build a debug APK:
 To run the application on iPhone device/simulator:  
  - Run from Android Studio in the current workflow (with Xcode / Apple iOS toolchain installed on macOS)  
  - Or open `iosApp/iosApp.xcodeproj` in Xcode and run standard configuration  
-
-### Web
-Supported web target: JavaScript (browser)
-
-Run the JS browser application: `./gradlew :webApp:jsBrowserDevelopmentRun`  
-
-Build web distribution: `./gradlew :webApp:composeCompatibilityBrowserDistribution`  
-Deploy the `webApp/build/dist/composeWebCompatibility/productionExecutable` directory to a web server  

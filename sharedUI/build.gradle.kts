@@ -22,8 +22,6 @@ kotlin {
         }
     }
 
-    js { browser() }
-
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -77,9 +75,6 @@ kotlin {
             implementation(libs.sqlDelight.driver.native)
         }
 
-        jsMain.dependencies {
-            implementation(libs.sqlDelight.driver.js)
-        }
     }
 
     targets

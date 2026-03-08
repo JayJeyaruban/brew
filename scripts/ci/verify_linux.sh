@@ -6,10 +6,8 @@ chmod +x ./gradlew
 # Fail fast on style violations in CI. Local auto-format-on-build is disabled when CI=true.
 ./gradlew lintKotlin --stacktrace
 
-# Linux CI verifies Android build/tests plus shared/web JS targets (no desktop/JVM or Wasm target).
+# Linux CI verifies Android build/tests.
 ./gradlew \
   :androidApp:assembleDebug \
   :androidApp:testDebugUnitTest \
-  :sharedUI:jsTest \
-  :webApp:compileKotlinJs \
   --stacktrace
