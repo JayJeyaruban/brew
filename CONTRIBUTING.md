@@ -11,7 +11,6 @@ For prerequisites, local setup, and platform run/build commands, see `README.MD`
 Most contributions will touch one or more of:
 - shared code in `sharedUI`
 - Android app code in `androidApp`
-- Web app code in `webApp`
 - iOS app code in `iosApp`
 
 ## Local Setup and Running
@@ -23,7 +22,7 @@ For prerequisites, initial setup, and platform run/build commands, see `README.M
 Before opening a pull request:
 - Run relevant Gradle build/test commands for the module(s) you changed.
 - Prefer module-scoped tasks for faster iteration.
-- If you changed `sharedUI`, validate at least one supported consumer platform (Android, Web JS, or iOS) as practical.
+- If you changed `sharedUI`, validate at least one supported consumer platform (Android or iOS) as practical.
 - If there is no automated test coverage for your change, include manual verification steps in the PR.
 
 Formatting and lint workflow:
@@ -41,7 +40,6 @@ Examples (not strict requirements for every change):
 ```bash
 ./gradlew build
 ./gradlew :sharedUI:build
-./gradlew :webApp:jsBrowserDevelopmentRun
 ./gradlew :androidApp:assembleDebug
 ```
 
@@ -91,7 +89,6 @@ Examples:
 - `feat(sharedUI): add brew notes field`
 - `fix(androidApp): prevent crash on startup`
 - `docs: add contributing guide`
-- `refactor(webApp): simplify startup wiring`
 - `chore: update Gradle dependencies`
 
 Common types:
@@ -129,5 +126,5 @@ Additional expectations:
 When reporting bugs or proposing features, include:
 - Steps to reproduce (for bugs)
 - Expected behavior vs actual behavior
-- Affected platforms (`androidApp`, `webApp`, `iosApp`, or shared code)
+- Affected platforms (`androidApp`, `iosApp`, or shared code)
 - Relevant environment details (OS/device/browser/tool versions) when useful
