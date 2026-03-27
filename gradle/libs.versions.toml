@@ -1,6 +1,7 @@
 [versions]
 
 kotlin = "2.3.10"
+ksp = "2.3.5"
 compose-multiplatform = "1.10.0"
 material3 = "1.10.0-alpha05"
 agp = "9.0.1"
@@ -17,6 +18,7 @@ materialKolor = "4.1.1"
 multiplatform-nav3-ui = "1.0.0-alpha05"
 kotlinter = "5.4.2"
 compose-rules = "0.4.28"
+kreplica = "6.0.0-alpha2"
 
 [libraries]
 
@@ -65,3 +67,5 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kreplica = { id = "io.availe.kreplica", version.ref = "kreplica"}

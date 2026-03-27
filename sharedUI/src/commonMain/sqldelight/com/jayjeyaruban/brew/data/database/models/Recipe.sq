@@ -1,0 +1,35 @@
+CREATE TABLE Recipe (
+    id INTEGER PRIMARY KEY NOT NULL,
+    beanId INTEGER NOT NULL,
+    dose INTEGER NOT NULL,
+    grinderId INTEGER,
+    espressoMachineId INTEGER NOT NULL,
+    targetOutput INTEGER,
+
+    FOREIGN KEY (beanId) REFERENCES Bean(id),
+    FOREIGN KEY (grinderId) REFERENCES Grinder(id),
+    FOREIGN KEY (espressoMachineId) REFERENCES EspressoMachine(id)
+);
+
+insertRecipe {
+    INSERT INTO Recipe(beanId, dose, grinderId, espressoMachineId, targetOutput)
+    VALUES (?, ? ,?, ?, ?);
+
+    SELECT last_insert_rowid();
+}
+
+recentRecipes:
+SELECT
+    r.id AS id,
+    beanId,
+    dose,
+    targetOutput,
+    b.name AS beanName,
+    espressoMachineId,
+    e.name AS espressoMachineName,
+    grinderId,
+    g.name AS grinderName
+FROM Recipe r
+JOIN Bean b ON r.beanId = b.id
+JOIN EspressoMachine e ON r.espressoMachineId = e.id
+LEFT JOIN Grinder g ON r.grinderId = g.id;

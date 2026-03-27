@@ -1,7 +1,7 @@
 package com.jayjeyaruban.brew.di
 
+import com.jayjeyaruban.brew.data.database.BrewDatabase
 import com.jayjeyaruban.brew.data.database.DatabaseDriverFactory
-import com.jayjeyaruban.brew.db.BrewDatabase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
